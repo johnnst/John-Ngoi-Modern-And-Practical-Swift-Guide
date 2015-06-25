@@ -170,8 +170,8 @@ Error handling in Swift is somewhat up in the air. Here's a pattern to use for n
 **For example:**
 ```swift
 enum Result<T> {
-case Success(T)
-case Failure(String)
+    case Success(T)
+    case Failure(String)
 }
 ```
 If you are simply handling NSError objects, you can do this.
