@@ -47,10 +47,10 @@ Use descriptive names with camel case for classes, methods, variables, etc. Clas
 **For example:**
 ```swift
 class SomeClass {
-let someConstant = 100
-var someString: String?
-var awesomeButton: UIButton?
-var prettyPhoto: UIImageView?
+    let someConstant = 100
+    var someString: String?
+    var awesomeButton: UIButton?
+    var prettyPhoto: UIImageView?
 }
 ```
 
@@ -86,9 +86,9 @@ class D3SomeAwesomeViewController {
 **For example:**
 ```swift
 if someString.isEmpty {
-someString = "hello world"
+    someString = "hello world"
 } else {
-println("\(someString)")
+    println("\(someString)")
 }  
 ```
 
@@ -146,6 +146,8 @@ When using a delegate or datasource, just copy and paste the actual name into th
 
 `//MARK: SomeCustomDelegate`
 
+`//MARK: SomeCustomProtocol`
+
 
 ### Ternary Operator
 
@@ -179,14 +181,14 @@ If you are simply handling NSError objects, you can do this.
 var error: NSError? = nil
 var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(someData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as NSDictionary
 if let err = error {
-// handle error here
+    // handle error here
 
-// provide exit if needed
-return
+    // provide exit if needed
+    return
 }
 
 if let json = jsonResult {
-// always check for the actual result, as NSError is not always reliable
+    // always check for the actual result, as NSError is not always reliable
 }
 
 ```
@@ -216,11 +218,11 @@ When defining methods, use optionals in the parameters for safety. This avoids y
 
 ```swift
 func convertStringToInt (input: String?) -> Int? {
-if let value = input {
-let newValue = value.toInt()
-return newValue
-}
-return nil
+    if let value = input {
+        let newValue = value.toInt()
+        return newValue
+    }
+    return nil
 }
 ```
 
@@ -228,10 +230,10 @@ return nil
 
 ```swift
 func convertStringToInt (input: String) -> Int {
-if let newValue = input.toInt() {
-return newValue
-}
-return 0
+    if let newValue = input.toInt() {
+        return newValue
+    }
+    return 0
 }
 ```
 
@@ -295,20 +297,20 @@ In Swift, to declare a static property, you have to declare it in a struct or en
 
 ```swift
 struct Sections {
-static let feedback = 0
-static let generalInformation = 1
-static let developerSettings = 2
+    static let feedback = 0
+    static let generalInformation = 1
+    static let developerSettings = 2
 }
 
 struct Rows {
-static let tellUsWhatYouThink = 0
-static let reportAProblem = 1
+    static let tellUsWhatYouThink = 0
+    static let reportAProblem = 1
 
-static let checkForUpdates = 0
-static let termsAndConditions = 1
-static let signOut = 2
+    static let checkForUpdates = 0
+    static let termsAndConditions = 1
+    static let signOut = 2
 
-static let credentialsAndEnvironment = 0
+    static let credentialsAndEnvironment = 0
 }
 ```
 
@@ -327,31 +329,31 @@ Below are a few example uses for it.
 
 ```swift
 enum ImageViewModes: Int {
-case None = 0
-case DoubleTapToZoom = 1
-case PinchToZoom = 2
+    case None = 0
+    case DoubleTapToZoom = 1
+    case PinchToZoom = 2
 }
 ```
 
 ```swift
 private enum Uploadable {
-case Data(NSURLRequest, NSData)
-case File(NSURLRequest, NSURL)
-case Stream(NSURLRequest, NSInputStream)
+    case Data(NSURLRequest, NSData)
+    case File(NSURLRequest, NSURL)
+    case Stream(NSURLRequest, NSInputStream)
 }
 ```
 
 ```swift
 public enum Method: String {
-case OPTIONS = "OPTIONS"
-case GET = "GET"
-case HEAD = "HEAD"
-case POST = "POST"
-case PUT = "PUT"
-case PATCH = "PATCH"
-case DELETE = "DELETE"
-case TRACE = "TRACE"
-case CONNECT = "CONNECT"
+    case OPTIONS = "OPTIONS"
+    case GET = "GET"
+    case HEAD = "HEAD"
+    case POST = "POST"
+    case PUT = "PUT"
+    case PATCH = "PATCH"
+    case DELETE = "DELETE"
+    case TRACE = "TRACE"
+    case CONNECT = "CONNECT"
 }
 ```
 
@@ -367,17 +369,17 @@ Creating models in Swift is much more enjoyable vs Objective C style.
 
 ```swift
 class Person {
-var personId: Int?
-var firstName: String?
-var lastName: String?
-var awesomePerson: Bool?
+    var personId: Int?
+    var firstName: String?
+    var lastName: String?
+    var awesomePerson: Bool?
 
-init(firstName: String, lastName: String, awesomePerson: Bool = true) {
-self.personId = SomeMagicalIdGenerator()
-self.firstName = firstName
-self.lastName = lastName
-self.awesomePerson = awesomePerson
-}
+    init(firstName: String, lastName: String, awesomePerson: Bool = true) {
+        self.personId = SomeMagicalIdGenerator()
+        self.firstName = firstName
+        self.lastName = lastName
+        self.awesomePerson = awesomePerson
+    }
 }
 ```
 
@@ -419,8 +421,8 @@ When you need to run something in the background, use GCD.
 
 ```swift
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-sleep(3)
-println("slept for 3 seconds")
+    sleep(3)
+    println("slept for 3 seconds")
 })
 ```
 
@@ -434,7 +436,7 @@ When you need to run something on main thread, use GCD. Useful for performing UI
 
 ```swift
 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-println("calling gcd main thread")
+    println("calling gcd main thread")
 })
 ```
 
@@ -447,19 +449,19 @@ dispatch_once is a great way to avoid executing the same block of code more than
 ```swift
 class MainClass {
 
-class var someValue: String {
+    class var someValue: String {
 
-struct Static {
-static var token: dispatch_once_t = 0
-static var value: String?
-}
+        struct Static {
+            static var token: dispatch_once_t = 0
+            static var value: String?
+        }
 
-dispatch_once(&Static.token, { () -> Void in
-Static.value = "new value, never changes and executed only once"
-})
+        dispatch_once(&Static.token, { () -> Void in
+            Static.value = "new value, never changes and executed only once"
+        })
 
-return Static.value!
-}
+    return Static.value!
+    }
 }
 ```
 
@@ -469,17 +471,17 @@ return Static.value!
 Singleton objects should use a thread-safe pattern for creating their shared instance.
 ```swift
 class Singleton {
-class var sharedInstance: Singleton {
-struct Static {
-static var instance: Singleton?
-static var token: dispatch_once_t = 0
-}
+    class var sharedInstance: Singleton {
+        struct Static {
+            static var instance: Singleton?
+            static var token: dispatch_once_t = 0
+        }
 
-dispatch_once(&Static.token) {
-Static.instance = Singleton()
-}
-return Static.instance!
-}
+        dispatch_once(&Static.token) {
+            Static.instance = Singleton()
+        }
+    return Static.instance!
+    }
 }
 ```
 This will prevent [possible and sometimes prolific crashes](http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html).
